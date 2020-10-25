@@ -38,6 +38,11 @@ class Login extends Controller {
             return true;
        }
     }
+
+    public static function logoutUser(){
+        unset($_SESSION['id']);
+        session_destroy();
+    }
 }
 
 

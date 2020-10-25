@@ -11,10 +11,39 @@
 </head>
 <body>
     <?php 
-        $controller = isset($_GET["controller"]) ? $_GET["controller"] : "login";
-        $method = isset($_GET["method"]) ? $_GET["method"] : "index";
-        
-        include ("controller/$controller.class.php");
+    
+    $controller = isset($_GET["controller"]) ? $_GET["controller"] : "login";
+    $method = isset($_GET["method"]) ? $_GET["method"] : "index";
+    
+    include ("controller/$controller.class.php");
+    
+    ?>
+    <!--Navbar-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">AuthSystem</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <?php 
+                if($_SESSION['id']){
+                    echo "
+                        <form class='form-inline my-2 my-lg-0'>
+                            <button class='btn btn-danger'>Logout</button>
+                        </form>
+                    ";
+                }
+            ?>
+        </div>
+    </nav>
+
+    <?php 
         $object = new $controller();
         $object->$method();
     ?>
