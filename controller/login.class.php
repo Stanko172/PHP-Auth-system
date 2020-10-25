@@ -12,11 +12,13 @@ class Login extends Controller {
             try{
                 $user = new User($_POST['username'], $_POST['pwd']);
                 self::loginUser($user);
-                echo "<h1>Login success!</h1>";
+                $this->load("home", "view");
             }catch(Exception $e){
-                echo "Login failed: " . $e->getMessage();
+                $this->load("login", "view", array("error" => $e->getMessage()));
             }
 
+        }else{
+            $this->load("login", "view");
         }
     }
 
