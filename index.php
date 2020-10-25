@@ -8,24 +8,10 @@
 <body>
     <h1>Welcome!</h1>
     <?php 
-        include_once('controller/controller.class.php');
+        include_once('controller/login.class.php');
 
-        class Test extends Controller{
-            public $conn;
-
-            public function startTest(){
-                $this->conn = self::$db->getConnection();
-                $result = $this->conn->query("SELECT * FROM user");
-                $users = $result->fetchAll(PDO::FETCH_OBJ);
-
-                foreach($users as $user){
-                    echo $user->username;
-                }
-            }
-        }
-
-        $test = new Test();
-        $test->startTest();
+        $obj = new Login();
+        $obj->index();
     ?>
 </body>
 </html>

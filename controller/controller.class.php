@@ -1,5 +1,5 @@
 <?php 
-include('db.class.php');
+include_once('db.class.php');
 
 class Controller {
     protected static $db;
