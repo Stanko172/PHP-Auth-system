@@ -8,17 +8,24 @@
 <body>
     <h1>Welcome!</h1>
     <?php 
-        include_once('controller/db.class.php');
+        include_once('controller/controller.class.php');
 
-        $db = new DB();
-        $conn = $db->getConnection();
+        class Test extends Controller{
+            public $conn;
 
-        $sql_query = "SELECT * FROM user";
-        $result = $conn->query($sql_query);
+            public function startTest(){
+                $this->conn = self::$db->getConnection();
+                $result = $this->conn->query("SELECT * FROM user");
+                $users = $result->fetchAll(PDO::FETCH_OBJ);
 
-        $users = $result->fetchAll(PDO::FETCH_OBJ);
+                foreach($users as $user){
+                    echo $user->username;
+                }
+            }
+        }
 
-        foreach($users as $user) echo "<h4>" . $user->username . "</h4>"
+        $test = new Test();
+        $test->startTest();
     ?>
 </body>
 </html>
